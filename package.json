@@ -12,6 +12,7 @@
     "govuk-frontend": "5.14.0",
     "govuk-prototype-kit": "13.18.1",
     "hmrc-frontend": "6.111.0",
-    "jquery": "4.0.0"
+    "jquery": "4.0.0",
+    "moment": "^2.30.1"
   }
 }
