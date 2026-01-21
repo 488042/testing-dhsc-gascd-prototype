@@ -1,0 +1,166 @@
+{% extends "d3/layouts/main.html" %}
+
+{% set pageName = "D3 example" %}
+
+{% block content %}
+<!-- Test out loading data within the D3 file, not a separate CSV file -->
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<a href="d3" class="govuk-back-link">Back</a>
+<h1>{{pageName}}</h1>
+
+<style>
+  text{font-family:"GDS Transport", arial, sans-serif;font-size:1em}
+</style>
+<p>Here is an SVG bar chart with the size set to ems:</p>
+<svg viewBox="0 0 20em 20em" height = "12em" width = 30em xmlns="http://www.w3.org/2000/svg">
+  <!-- X axis -->
+  <line x1 = "0" y1 = "0" x2 = "20em" y2 = "0" stroke="grey"></line>
+  <!-- Ticks -->
+  <line x1 = "0em" y1 = "0" x2 = "0em" y2 = "0.5em" stroke="grey"></line>
+  <line x1 = "10em" y1 = "0" x2 = "10em" y2 = "0.5em" stroke="grey"></line>
+  <line x1 = "20em" y1 = "0" x2 = "20em" y2 = "0.5em" stroke="grey"></line>
+
+  <!-- Labels -->
+  <text x = 0 y = "1.5em">0</text>
+  <text x = 10em y = "1.5em">1,500</text>
+  <text x = 20em y = "1.5em">3,000</text>
+
+  <!-- Bars -->
+   <g>
+    <title>Suffolk - 1,500</title>
+  <text x = "0" y = 3em>Suffolk</text>
+  <rect x="0" y = "3.3em" width="10em" height="1em" rx="3"fill="#69b3a2"/>
+</g>
+<g>
+  <title>Cambridgeshire - 1,200</title>
+  <text x = "0" y = "6em">Cambridgeshire</text>
+  <rect x="0" y = "6.3em" width="6em" height="1em" rx="3"fill="#69b3a2"/>
+</g>
+<g>
+  <title>Norfolk - 2,800</title>
+  <text x = "0" y = "9em">Norfolk</text>
+  <rect x="0" y = "9.3em" width="18em" height="1em" rx="3"fill="#69b3a2"/>
+</g>
+</svg>
+
+<p>Here's an SVG bar chart created with D3.js:</p>
+
+<style>
+  @media only screen and (max-width: 500px) {
+    #my_dataviz{
+      width:400px; 
+      overflow-x: scroll;
+    }
+  }
+  .legendTitle, .chartText{font-size:1.2em}
+  .chartAxis{font-size:1.5em}
+
+</style>
+<!-- Add a svg area, empty -->
+<div id="my_dataviz"></div>
+
+<!-- Based on the example https://d3-graph-gallery.com/intro_d3js.html -->
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 50, right: 300, bottom: 100, left: 100},
+    width = 800 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Create data - wrap all the graph commands in this function:
+d3.csv("/public/csv/las.csv", function(data) {
+// this is the equivalent of eg var loaded = [ {x:10, y:20}, {x:40, y:90}, {x:80, y:50} ]
+
+// Add X axis
+var x = d3.scaleLinear()
+    .domain([0, 3000])
+    .range([ 0, width]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-45)")
+      .style("text-anchor", "end")
+      .attr("class","chartAxis");
+
+  // Y axis
+  var y = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(data.map(function(d) { return d.LA; }))
+    .padding(.6);
+  svg.append("g")
+    .call(d3.axisLeft(y))
+    .attr("class","chartText");
+
+  //Bars
+  svg.selectAll("myRect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", x(0) )
+    .attr("y", function(d) { return y(d.LA); })
+    .attr("width", function(d) { return x (d.Value); })
+    .attr("height", y.bandwidth() )
+    .attr("fill", "#69b3a2");
+
+    svg.attr("transform",  "translate(150 50)")
+
+    // Add a legend
+const legend = svg.append("g");
+legend.append("text")
+	.text("Beds per 100,000 population")
+	.attr("x", 0)
+	.attr("y", -20)
+	.attr("class", "legendTitle");
+   //  Log the data
+    console.log(data);
+   });
+</script>
+<p>Here's the same data shown in a table with conditional formatting:</p>
+<div class="govuk-grid-row">
+<div class="govuk-grid-column-one-half">
+  <h3>Total beds per 100,000 people</h3>
+    <table class="govuk-table">
+    <!-- <caption><h3 class="govuk-heading-s" style="text-align:left">Suffolk County Council</h3></caption>
+    <tr class="govuk-table__row"> -->
+      <th scope="row" class="govuk-table__header">Suffolk</th>
+      <td class="govuk-table__cell">1500
+        <svg viewBox="0 0 60 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" width="60" height="5" rx="1"stroke="#e1e1e1" fill="white"/>
+          <rect x="0" width="30" height="5" rx="1"fill="gold" stroke="grey"/>
+        </svg>
+      </td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Cambridgeshire</th>
+      <td class="govuk-table__cell">1,200
+        <svg viewBox="0 0 60 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" width="60" height="5" rx="1"stroke="#e1e1e1" fill="white"/>
+            <rect x="0" width="24" height="5" rx="1"fill="gold" stroke="grey"/>
+        </svg>
+      </td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Norfolk</th>
+      <td class="govuk-table__cell">2,800
+        <svg viewBox="0 0 60 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" width="60" height="5" rx="1"stroke="#e1e1e1" fill="white"/>
+              <rect x="0" width="53" height="5" rx="1"fill="gold" stroke="grey"/>
+        </svg>
+      </td>
+    </tr>
+    </table>
+    </div>
+    </div
+{% endblock %}

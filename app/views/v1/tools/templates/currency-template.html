@@ -1,0 +1,61 @@
+{% extends "v1/layouts/main.html" %}
+
+{% if  data['user'] == "agent"  %}
+  {% set pageQuestion = "Currency input template" %}
+  {% set pageHint = "" %}
+  {% set valueOne = "Yes" %}
+  {% set valueTwo= "No" %}
+  {% set errorOne = "Enter a value for did your client get Boab tax" %}
+{% else %}
+  {% set pageQuestion = "Currency input template" %}
+  {% set pageHint = "" %}
+  {% set valueOne = "Yes" %}
+  {% set valueTwo= "No" %}
+  {% set errorOne = "Enter a value for did you get Boab tax" %}
+{% endif %}
+
+{% set errorOne = "Enter a value for did your client get Boab tax" %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+
+{% if  data['user'] == "agent"  %}
+{{pageQuestionAgent}}
+{% else %}
+{{pageQuestion}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds"> 
+
+  <form action="index" method="post" novalidate>
+    {{ govukInput({
+      id: pageAnswer,
+      name: pageAnswer,
+      value: data[pageAnswer],
+      label: {
+        text: pageQuestion,
+        classes: "govuk-label--l",
+        isPageHeading: true
+      },
+      hint: {
+        text: pageHint
+      },
+      prefix: {
+        text: "£"
+      },
+      classes: "govuk-input--width-5",
+      spellcheck: false
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+  
+  {% endblock %}
+  

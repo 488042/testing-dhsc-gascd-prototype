@@ -1,0 +1,72 @@
+<style>
+          
+    .dynamic-cell {
+      border-bottom: 10px gold solid;
+      padding: 0.5em 0.5em 0 0;
+    }
+    .govuk-summary-list__row {
+      border-bottom: 1px #e1e1e1 solid;
+      height:3em
+    }
+
+    .govuk-summary-list__key{
+        font-weight: normal
+    }
+    .dynamic-bar{
+      display:block;
+      padding-bottom: 1em;
+    }
+
+</style>
+<dl class="govuk-summary-list">
+<div class="govuk-summary-list__row">
+<dt class="govuk-summary-list__key govuk-!-width-one-half">
+  Outstanding
+</dt>
+<dd class="govuk-summary-list__value">
+ 0
+</dd>
+</div>
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key govuk-!-width-one-half">
+    Good
+  </dt>
+  <dd class="govuk-summary-list__value">
+ 14
+    <svg width="120" height="10" xmlns="http://www.w3.org/2000/svg" class="dynamic-bar">
+      <rect width="120" height="10" x="0" y="0" rx="0" ry="0" fill="gold" />
+     </svg>
+  </dd>
+
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+      Requires improvement
+    </dt>
+    <dd class="govuk-summary-list__value">
+     3
+     <svg width="120" height="10" xmlns="http://www.w3.org/2000/svg" class="dynamic-bar">
+      <rect width="30" height="10" x="0" y="0" rx="0" ry="0" fill="gold" />
+     </svg>
+    </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key govuk-!-width-one-half">
+        Inadequate
+      </dt>
+      <dd class="govuk-summary-list__value">
+       7
+       <svg width="120" height="10" xmlns="http://www.w3.org/2000/svg" class="dynamic-bar">
+        <rect width="70" height="10" x="0" y="0" rx="0" ry="0" fill="gold" />
+       </svg>
+      </dd>
+      </div>
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key govuk-!-width-one-half">
+    Total
+  </dt>
+  <dd class="govuk-summary-list__value">
+   24</span>
+  </dd>
+  </div>
+  </dl>

@@ -1,0 +1,163 @@
+{% extends "v1/layouts/main.html" %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+
+{% if  data['user'] == "agent"  %}
+{{pageQuestionAgent}}
+{% else %}
+{{pageQuestion}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-third">
+    <form action="#" method="post" novalidate>
+<h1 class="govuk-heading-m">
+  Check boxes editor
+</h1>
+
+{% include "./_navigation.html" %}
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Legend
+      </label>
+      <p id="ss-h1-hint" class="govuk-hint">Edit the question</p>
+      <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
+      type="text" value="{{ data['ss-h1'] | default('What do you juggle?')}}" aria-describedby="ss-h1-hint">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Hint text (optional)
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
+      type="text" value="{{ data['ss-hint'] | default ("Select all that apply")}}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Check box 1
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-option-1" name="ss-option-1" 
+      type="text" value="{{ data['ss-option-1'] | default("Balls") }}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Check box 2
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-option-2" name="ss-option-2" 
+      type="text" value="{{ data['ss-option-2'] | default("Clubs") }}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Name (for session data)
+      </label>
+      <p id="ss-answer-hint" class="govuk-hint">Stores the answer in your browser</p>
+      <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
+      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}" aria-describedby="ss-answer-hint">
+    </div>
+
+    {{ govukButton({
+      text: "Apply"
+    }) }}
+
+  </form>
+
+    <h1 class="govuk-heading-m">
+      Output
+    </h1>
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button"  onclick="myFunction()">
+      Copy to clipboard
+    </button>
+  <p class="govuk-body" id="myInput">
+<code>
+  &#123;&#123; govukCheckboxes&#40;&#123; 
+
+  name: &#x22;{{data['ss-answer']}}&#x22;,
+  values: &#x22;{{data['ss-answer']}}&#x22;,
+    fieldset: &#123;
+    legend: &#123;
+      text: &#x22;{{data['ss-h1']}}&#x22;,
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l"
+    &#125;
+  &#125;,
+  hint: &#123;
+    text: &#x22;{{data['ss-hint']}}&#x22;
+  &#125;,
+  items: &#91;
+    &#123;
+      value: &#x22;{{data['ss-option-1']}}&#x22;,
+      text: &#x22;{{data['ss-option-1']}}&#x22;
+    &#125;,
+    &#123;
+      value: &#x22;{{data['ss-option-2']}}&#x22;,
+      text: &#x22;{{data['ss-option-2']}}&#x22;
+    &#125;
+  &#93;
+&#125;&#41; &#125;&#125;
+
+  </code>
+</p>
+
+
+    
+  </div> 
+  <div class="govuk-grid-column-two-thirds"> 
+  
+  <form action="#" method="post" novalidate>
+    
+  {{ govukCheckboxes({
+    name: data['ss-answer'],
+    values: data['ss-answer'],
+    fieldset: {
+      legend: {
+        text: data['ss-h1'] | default("What do you juggle?"),
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    hint: {
+      text: data['ss-hint'] | default("Select all that apply")
+    },
+    items: [
+      {
+        value: data['ss-option-1'],
+        text: data['ss-option-1'] | default("Balls")
+      },
+      {
+        value: data['ss-option-2'],
+        text: data['ss-option-2'] | default("Clubs")
+      }
+    ]
+  }) }}
+
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+  <script>
+  function myFunction() {
+    // Get the text field
+    let copyText = document.getElementById("myInput").innerHTML;
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText);
+
+    // Alert the copied text
+    alert("Code copied");
+} 
+  </script>
+  
+  {% endblock %}
+  

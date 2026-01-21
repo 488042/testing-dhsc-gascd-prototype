@@ -1,0 +1,74 @@
+{% extends "v1/layouts/main.html" %}
+
+<!-- I set these values at the top of the page to save scrolling.  -->
+{% if  data['user'] == "agent"  %}
+  {% set pageQuestion = "Check boxes template" %}
+  {% set pageHint = "" %}
+  {% set valueOne = "One" %}
+  {% set valueTwo= "Two" %}
+  {% set valueThree= "Three" %}
+  {% set errorOne = "" %}
+{% else %}
+  {% set pageQuestion = "Check boxes template" %}
+  {% set pageHint = "" %}
+  {% set valueOne = "One" %}
+  {% set valueTwo= "Two" %}
+  {% set valueThree= "Three" %}
+  {% set errorOne = "" %}
+{% endif %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+{{pageQuestion}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds"> 
+
+    <!-- Uncomment this H1 heading and add a pageTitle value for complex 
+      question pages -->
+    <!-- <h1 class="govuk-heading-l">
+      {{pageTitle}}
+    </h1> -->
+
+  <form action="index" method="post" novalidate>
+
+    {{ govukCheckboxes({
+      name: pageAnswer,
+      value: data[pageAnswer],
+      fieldset: {
+        legend: {
+          text: pageQuestion,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: pageHint
+      },
+      items: [
+        {
+          value: valueOne,
+          text: valueOne
+        },
+        {
+          value: valueTwo,
+          text: valueTwo
+        },
+        {
+          value: valueThree,
+          text: valueThree
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+  
+  {% endblock %}
+  

@@ -1,0 +1,319 @@
+{% extends "v1/layouts/main.html" %}
+
+{% block pageTitle %}
+  Conditional page editor
+{% endblock %}
+
+{% set pageHeadline = "H1 heading" %}
+{% set pageQuestion = "Do you wanna?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-third">
+<form action="#" method="post" novalidate>
+<h1 class="govuk-heading-m">
+  Conditional page editor
+</h1>
+
+{% include "./_navigation.html" %}
+<p>
+  This is a 'conditional reveal' page. Select the first radio button to open a second question.
+</p>
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        H1 heading
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-headline" name="ss-headline" 
+      type="text" value="{{ data['ss-headline'] | default('H1 heading')}}">
+    </div>
+    
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Paragraph 1
+      </label>
+      <textarea class="govuk-textarea" id="ss-para1" name="ss-para1" rows="2" 
+      cols="25">
+        {{ data['ss-para1'] }}
+    </textarea>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Paragraph 2
+      </label>
+      <textarea class="govuk-textarea" id="ss-para2" name="ss-para2" rows="2" 
+      cols="25">
+        {{ data['ss-para2'] }}
+      </textarea>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Paragraph 3
+      </label>
+      <textarea class="govuk-textarea" id="ss-para3" name="ss-para3" rows="2" 
+      cols="25">
+        {{ data['ss-para3'] }}
+      </textarea>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Link text
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-link-text" name="ss-link-text" 
+      type="text" value="{{ data['ss-link-text'] | default('What is the thing?')}}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Link ref
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-link-ref" name="ss-link-ref" 
+      type="text" value="{{ data['ss-link-ref'] | default('#')}}">
+    </div>
+<hr>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Radio buttons question
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
+      type="text" value="{{ data['ss-h1'] | default('Do you wanna?')}}">
+    </div>
+
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Hint text (optional)
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
+      type="text" value="{{ data['ss-hint'] }}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Option 1
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
+      type="text" value="{{ data['ss-value-1'] | default("Yes")}}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Option 2
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
+      type="text" value="{{ data['ss-value-2'] | default("No")}}">
+    </div>
+
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Answer ID
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
+      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
+    </div>
+
+    <hr>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Conditional question
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-conditional" name="ss-conditional" 
+      type="text" value="{{ data['ss-conditional'] | default('Enter the amount')}}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Conditional answer ID
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-conditional-id" name="ss-conditional-id" 
+      type="text" value="{{ data['ss-conditional-id'] | default("conditional") }}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Conditional hint text (optional)
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-conditional-hint" name="ss-conditional-hint" 
+      type="text" value="{{ data['ss-conditional-hint'] }}">
+    </div>
+
+    {% set conditionalHtml %}
+    {{ govukInput({
+      id: data['ss-conditional-id'],
+      name: data['ss-conditional-id'],
+      classes: "govuk-!-width-one-third",
+      label: {
+        text: data['ss-conditional']
+      },
+      hint: {
+        text: data['ss-conditional-hint']
+      },
+      prefix: {
+        text: "£"
+      }
+    }) }}
+    {% endset -%}
+
+    <p class="govuk-body">
+      Press return / 'Apply' to update the page.
+    </p>
+
+    {{ govukButton({
+      text: "Apply"
+    }) }}
+
+  </form>
+
+    <h1 class="govuk-heading-m">
+      Output
+    </h1>
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button"  onclick="myFunction()">
+      Copy to clipboard
+    </button>
+  <p class="govuk-body">
+<code id="myInput">
+  <!--<h1 class="govuk-heading-xl">
+    {{ data['ss-headline'] }}
+  </h1>
+  <p>
+    {{ data['ss-para1'] }}
+  </p>
+  <p>
+    {{ data['ss-para2'] }}
+  </p>
+  <p>
+    {{ data['ss-para3'] }}
+  </p>
+
+  <p class="govuk-body">
+    <a href="{{ data['ss-link-ref'] }}" target="_blank">{{ data['ss-link-text'] }}</a>
+  </p>
+
+  </p>-->
+
+  &#123;% set conditionalHtml %&#125;
+  &#123;&#123; govukInput&#40;&#123;
+    id: data['ss-conditional-id'],
+    name: data['ss-conditional-id'],
+    classes: "govuk-!-width-one-third",
+    label: &#123;
+      text: "{{data['ss-conditional']}}"
+    },
+    hint: &#123;
+      text: "{{cdata['ss-conditional-hint']}}"
+    },
+    prefix: &#123;
+      text: "£"
+    }
+  &#125;&#41; &#125;&#125;
+  &#123;% endset -%&#125;
+
+  &#123;&#123; govukRadios&#40;&#123; 
+    name: "{{data['ss-answer']}}",
+    id: "{{data['ss-answer']}}",
+    fieldset: &#123;
+      legend: &#123;
+        text: "{{data['ss-h1'] | default("Do you wanna?")}}",
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--m"
+      &#125;
+    &#125;,
+    hint: &#123;
+      text: "{{pageHint}}"
+    &#125;,
+    items: &#91;
+      &#123;
+        value: "{{data['ss-value-1']}}",
+        text: "{{data['ss-value-1']}}",
+        conditional: {
+          html: conditionalHtml
+        }
+      &#125;,
+      &#123;
+        value: "{{data['ss-value-2']}}",
+        text: "{{data['ss-value-2']}}"
+      &#125;
+    &#93;
+  &#125;&#41; &#125;&#125;
+  </code>
+</p>
+    
+  </div> 
+  <div class="govuk-grid-column-two-thirds"> 
+  
+  <form action="#" method="post" novalidate>
+    <h1 class="govuk-heading-xl">
+      {{data['ss-headline'] | default('H1 heading')}}
+    </h1>
+    
+    <p>
+      {{ data['ss-para1'] }}
+    </p>
+    <p>
+      {{ data['ss-para2'] }}
+    </p>
+    <p>
+      {{ data['ss-para3'] }}
+    </p>
+
+    <p class="govuk-body">
+      <a href={{ data['ss-link-ref'] }} class="govuk-link" target="_blank">{{ data['ss-link-text'] }}</a>
+    </p>
+
+  {{ govukRadios({
+    name: data['ss-answer'],
+    id: data['ss-answer'],
+    fieldset: {
+      legend: {
+        text: pageQuestion,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    hint: {
+      text: data['ss-hint']
+    },
+    items: [
+      {
+        value: data['ss-value-1'],
+        text: data['ss-value-1'],
+        conditional: {
+          html: conditionalHtml
+        }
+      },
+      {
+        value: data['ss-value-2'],
+        text: data['ss-value-2'] 
+      }
+    ]
+  }) }}
+
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+    
+  </form>
+
+
+  <script>
+  function myFunction() {
+    // Get the text field
+    let copyText = document.getElementById("myInput").innerHTML;
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText);
+
+    // Alert the copied text
+    alert("Code copied");
+} 
+  </script>
+  
+  {% endblock %}
+  

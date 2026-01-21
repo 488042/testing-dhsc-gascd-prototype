@@ -1,0 +1,72 @@
+{% extends "v1/layouts/main.html" %}
+
+<!-- I set these values at the top of the page to save scrolling.  -->
+{% if  data['user'] == "agent"  %} 
+  {% set pageQuestion = "What can your client juggle?" %}
+  {% set errorOne = "Enter a value for xxx" %}
+{% else %}
+  {% set pageQuestion = "What can you juggle?" %}
+  {% set errorOne = "Enter a value for xxx" %}
+{% endif %}
+
+{% set pageHint = "Select all that apply" %}
+{% set pageAnswer = "objects" %}
+{% set valueOne = "Balls" %}
+{% set valueTwo= "Clubs" %}
+{% set valueThree= "Knives" %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+{{pageQuestion}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds"> 
+
+    <!-- Uncomment this H1 heading and add a pageTitle value for complex 
+      question pages -->
+    <!-- <h1 class="govuk-heading-l">
+      {{pageTitle}}
+    </h1> -->
+
+  <form action="juggling-trick" method="post" novalidate>
+
+    {{ govukCheckboxes({
+      name: pageAnswer,
+      values: data[pageAnswer],
+      fieldset: {
+        legend: {
+          text: pageQuestion,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: pageHint
+      },
+      items: [
+        {
+          value: valueOne,
+          text: valueOne
+        },
+        {
+          value: valueTwo,
+          text: valueTwo
+        },
+        {
+          value: valueThree,
+          text: valueThree
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+  
+  {% endblock %}
+  

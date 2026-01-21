@@ -1,0 +1,120 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+{% set pageName = "All user journeys (Private beta - December 2025)" %}
+
+{% block content %}
+<div class="govuk-form-group">
+  <a class="govuk-back-link" href="javascript:history.back()">Back</a>
+</div>
+
+<h1 class="govuk-heading-xl">
+  <span class="govuk-caption-xl">Private beta (December 2025)</span>
+  All user journeys
+</h1>
+
+<h2 class="govuk-heading-l heading-override">Entry points into {{serviceName | lower}}</h2>
+<ol class="govuk-list govuk-list--number">
+  <li><a href="start">Get adult social care data (start)</a></li>
+</ol>
+
+<h2 class="govuk-heading-l">{{serviceName}}</h2>
+
+<h3 class="govuk-heading-m">Home</h3>
+
+<h4 class="govuk-heading-s heading-override">Care providers</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/home?locations=1">1 location</a></li>
+  <li><a href="signed-in/select-location?justSignedIn=true&locationName=&locations=&searchRequired=false&paginationRequired=false">2 to 20 locations (select a location)</a></li>
+  <li><a href="signed-in/select-location?justSignedIn=true&locationName=&locations=&searchRequired=true&paginationRequired=false">21 to 100 locations (select a location with search)</a></li>
+  <li><a href="signed-in/select-location?justSignedIn=true&locationName=&locations=&searchRequired=true&paginationRequired=true&page1=true">101 or more locations (select a location with search and pagination)</a></li>
+</ul>
+
+<h3 class="govuk-heading-m heading-override">Data > Care homes</h3>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/topics/residential-care/subtopics">Care homes (topic page)</a></li>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">Care home beds and occupancy levels</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/topics/residential-care/provision-and-occupancy/data">Care home beds and occupancy levels (data page)</a></li>
+  <ul class="list-override govuk-list--bullet">
+    <li><a href="signed-in/topics/residential-care/provision-and-occupancy/filters/_1-filters">Filter (care home bed numbers)</a></li>
+    <li><a href="signed-in/topics/residential-care/provision-and-occupancy/filters/_2-filters">Filter (care home bed types)</a></li>
+    <li><a href="signed-in/topics/residential-care/provision-and-occupancy/filters/_4-filters">Filter (care home bed numbers - trends over time)</a></li>
+    </ul>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">Data indicator details</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/help/beds-per-100000-adult-population">Adult social care beds per 100,000 adult population</a></li>
+  <li><a href="signed-in/help/beds-per-100000-adult-population-over-time">Adult social care beds per 100,000 adult population - over time</a></li>
+  <li><a href="signed-in/help/percentage-beds-occupied">Occupancy level percentages for adult social care beds</a></li>
+</ul>
+
+<h3 class="govuk-heading-m heading-override">Data > Population needs</h3>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/topics/population-needs/subtopics">Population needs (topic page)</a></li>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">Dementia prevalence and estimated diagnosis rate</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/topics/population-needs/dementia-prevalence/data">Dementia prevalence and estimated diagnosis rate (data page)</a></li>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">Economic factors and household composition</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/topics/population-needs/household-composition-and-economic-factors/data">Economic factors and household composition (data page)</a></li>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">General health, disability and learning disability</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/topics/population-needs/disability-prevalence/data">General health, disability and learning disability (data page)</a></li>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">Population size and age group percentages</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/topics/population-needs/population-age-and-size/data">Population size and age group percentages (data page)</a></li>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">Data indicator details</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/help/population-age">Age group percentages</a></li>
+  <li><a href="signed-in/help/dementia-prevalence">Dementia prevalence</a></li>
+  <li><a href="signed-in/help/disability-prevalence">Disability prevalence</a></li>
+  <li><a href="signed-in/help/estimated-dementia-diagnosis-rate-aged-65-and-over">Estimated dementia diagnosis rate for people aged 65 and over</a></li>
+  <li><a href="signed-in/help/household-deprivation">Households &lsquo;deprived in 4 dimensions&rsquo;</a></li>
+  <li><a href="signed-in/help/households-where-property-is-owned-outright">Households where the property is owned outright</a></li>
+  <li><a href="signed-in/help/learning-disability-prevalence">Learning disability prevalence</a></li>
+  <li><a href="signed-in/help/one-person-households-where-person-aged-65-or-over">One&#45;person households where the person is aged 65 or over</a></li>
+  <li><a href="signed-in/help/people-who-reported-bad-or-very-bad-health">People who reported bad or very bad health</a></li>
+  <li><a href="signed-in/help/primary-reason-for-accessing-long-term-adult-social-care">Primary reason for people to access long&#45;term adult social care</a></li>
+  <li><a href="signed-in/help/population-size">Population size</a></li>  
+</ul>
+
+<h3 class="govuk-heading-m">Additional screens</h3>
+
+<h4 class="govuk-heading-s heading-override">Service information pages</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="signed-in/service-information/data-indicator-details">Data indicator details</a></li>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">Footer pages</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="footer/disclaimer?onCookiesPage=false">Disclaimer</a></li>
+  <li><a href="footer/help?onCookiesPage=false">Help</a></li>
+  <li><a href="footer/privacy-policy?onCookiesPage=false">Privacy</a></li>
+  <li><a href="footer/cookies?onCookiesPage=true">Cookies</a></li>
+</ul>
+
+<h4 class="govuk-heading-s heading-override">Session sign in, sign out and timeout</h4>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="system/signed-out">You have signed out</a></li>
+</ul>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Tooltip taken from Nicolas Hoffmann (https://a11y.nicolas-hoffmann.net/modal/) -->
+<script src="/public/javascripts/jquery-accessible-modal-window-aria.js"></script>
+<!-- Font Awesome 4 icons for the notifications -->
+<link href="/public/open-source/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}

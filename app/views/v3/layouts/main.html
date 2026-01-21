@@ -1,0 +1,70 @@
+{#
+  For guidance on how to use layouts see:
+  https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
+#}
+
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+
+{% block stylesheets %}
+{{super()}}
+<style>
+
+  h1, h2, h3, p, ul, ol {
+    font-family: "GDS Transport", arial, sans-serif;
+  }
+
+  p, ul, ol {
+    font-size: 1.1875rem;
+    line-height: 1.3157894737;
+    color: #0b0c0c
+  }
+
+  /* Chris Harding (24.06.25) - This was broken, but I have fixed and commented it out until I know it is safe for deletion */
+  /* .govuk-width-container {
+    max-width: 1400px;
+  } */
+
+  .moj-side-navigation__sub-list {
+    list-style: none;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .moj-side-navigation__sub-list li {
+    margin-bottom: 0.5rem;
+  }
+
+</style>
+{% endblock %}
+
+{% block footer %}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "#",
+        text: "Accessibility statement"
+      },
+      {
+        href: "#",
+        text: "Cookies"
+      }, 
+      {
+        href: "#",
+        text: "Privacy"
+      },      
+      {
+        href: "#",
+        text: "Terms and conditions"
+      }
+    ]
+  }
+}) }}
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <!-- D3 is a third party (OPEN SOURCE) JavaScript library for visualizing data (https://d3js.org)-->
+  <script src="https://d3js.org/d3.v4.js"></script>
+{% endblock %}

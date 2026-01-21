@@ -1,0 +1,68 @@
+{% extends "v1/layouts/main.html" %}
+
+<!-- I set these values at the top of the page to save scrolling.  -->
+  {% set pageQuestion = "Who are you?" %}
+  {% set pageHint = "" %}
+  {% set pageAnswer = "user" %}
+  {% set valueOne = "A juggler" %}
+  {% set valueTwo= "A juggler's manager" %}
+  {% set errorOne = "Enter a value for who you are" %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error: {{errorOne}}}
+{% endif %}
+{{pageQuestion}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds"> 
+
+    <!-- Uncomment this H1 heading and add a pageTitle value for complex 
+      question pages -->
+    <!-- <h1 class="govuk-heading-l">
+      {{pageTitle}}
+    </h1> -->
+
+  <form action="juggling-balls" method="post" novalidate>
+
+    {{ govukRadios({
+      id: pageAnswer,
+      name: pageAnswer,
+      value: data[pageAnswer],
+      fieldset: {
+        legend: {
+          text: pageQuestion,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: pageHint
+      },
+      items: [
+        {
+          value: "juggler",
+          text: valueOne
+        },
+        {
+          value: "agent",
+          text: valueTwo
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+  
+  <style>
+    #footer-link{position: relative; top: 5em}
+  </style>
+  <div id="footer-link">
+     Set the user type: <a href="set-variables?user=juggler">Juggler</a> / <a href="set-variables?user=manager">Manager</a>
+  </div>
+  {% endblock %}
+  

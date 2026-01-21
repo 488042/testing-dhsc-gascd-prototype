@@ -1,0 +1,125 @@
+{% extends "v1/layouts/main.html" %}
+
+{% block pageTitle %}
+  Currency editor
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-third">
+    <form action="#" method="post" novalidate>
+<h1 class="govuk-heading-m">
+  Currency input editor
+</h1>
+
+{% include "./_navigation.html" %}
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Label
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
+      type="text" value="{{ data['ss-h1'] | default('Enter the amount')}}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Hint text (optional)
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
+      type="text" value="{{ data['ss-hint'] }}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Name (for session data)
+      </label>
+      <p id="ss-answer-hint" class="govuk-hint">Stores the answer in your browser</p>
+      <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
+      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}" aria-describedby="ss-answer-hint">
+    </div>
+
+    <p class="govuk-body">
+      Press return / 'Apply' to update the page.
+    </p>
+    
+    {{ govukButton({
+      text: "Apply"
+    }) }}
+
+  </form>
+
+    <h1 class="govuk-heading-m">
+      Output
+    </h1>
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button"  onclick="myFunction()">
+      Copy to clipboard
+    </button>
+  <p class="govuk-body" id="myInput">
+<code>
+  &#123;&#123; govukInput&#40;&#123; 
+  id: &#x22;{{data['ss-answer']}}&#x22;,  
+  name: &#x22;{{data['ss-answer']}}&#x22;,
+      label: &#123;
+        text: &#x22;{{data['ss-h1']}}&#x22;,
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
+      &#125;,
+    hint: &#123;
+      text: &#x22;{{data['ss-hint']}}&#x22;
+    &#125;,
+    prefix: &#123;
+    text: "£"
+    &#125;,
+    classes: "govuk-input--width-5",
+    spellcheck: false
+  &#125;&#41; &#125;&#125;
+  </code>
+</p>
+
+
+    
+  </div> 
+  <div class="govuk-grid-column-two-thirds"> 
+  
+  <form action="#" method="post" novalidate>
+   
+  {{ govukInput({
+    id: data['ss-answer'],
+    name: data['ss-answer'],
+    label: {
+      text: data['ss-h1'] | default('Enter the amount'),
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    hint: {
+      text: data['ss-hint']
+    },
+    prefix: {
+      text: "£"
+    },
+    classes: "govuk-input--width-5",
+    spellcheck: false
+  }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+  <script>
+  function myFunction() {
+    // Get the text field
+    let copyText = document.getElementById("myInput").innerHTML;
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText);
+
+    // Alert the copied text
+    alert("Code copied");
+} 
+  </script>
+  
+  {% endblock %}
+  

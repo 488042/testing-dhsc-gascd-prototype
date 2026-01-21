@@ -1,0 +1,15 @@
+//
+// For guidance on how to create filters see:
+// https://prototype-kit.service.gov.uk/docs/filters
+//
+
+const govukPrototypeKit = require('govuk-prototype-kit')
+const addFilter = govukPrototypeKit.views.addFilter
+
+// Add your filters here
+
+// Adds commas to separate thousands, for numbers greater than 999
+addFilter('addcommas', function (content) {
+  // TO DO - add case to handle nothing being there 
+  return content.toLocaleString("en-US") 
+})

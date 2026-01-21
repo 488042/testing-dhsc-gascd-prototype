@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "govuk-prototype-kit dev",
+    "serve": "govuk-prototype-kit serve",
+    "start": "govuk-prototype-kit start"
+  },
+  "dependencies": {
+    "@govuk-one-login/service-header": "^5.0.0",
+    "@govuk-prototype-kit/common-templates": "2.0.1",
+    "@ministryofjustice/frontend": "^8.0.0",
+    "@x-govuk/govuk-prototype-components": "^5.0.2",
+    "govuk-frontend": "5.14.0",
+    "govuk-prototype-kit": "13.18.1",
+    "hmrc-frontend": "6.111.0",
+    "jquery": "4.0.0"
+  }
+}

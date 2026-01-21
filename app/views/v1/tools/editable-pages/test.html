@@ -1,0 +1,117 @@
+{% extends "v1/layouts/main.html" %}
+
+{% block pageTitle %}
+Test page
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="editor-radios" method="post" novalidate>
+
+ 
+<code>
+  {{ govukInput({ 
+  id: "myAnswer",  
+  name: "myAnswer",
+      label: {
+        text: "Enter the amount",
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
+      },
+    hint: {
+      text: ""
+    },
+    prefix: {
+    text: "£"
+    },
+    classes: "govuk-input--width-5",
+    spellcheck: false
+  }) }}
+  </code>
+
+
+  {% set conditionalHtml %}
+  {{ govukInput({
+    id: data['ss-conditional-id'],
+    name: data['ss-conditional-id'],
+    classes: "govuk-!-width-one-third",
+    label: {
+      text: "Enter the amount"
+    },
+    hint: {
+      text: ""
+    },
+    prefix: {
+      text: "£"
+    }
+  }) }}
+  {% endset -%}
+
+  {{ govukRadios({ 
+    name: "myAnswer",
+    id: "myAnswer",
+    fieldset: {
+      legend: {
+        text: "Do you wanna?",
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        value: "Yes",
+        text: "Yes",
+        conditional: {
+          html: conditionalHtml
+        }
+      },
+      {
+        value: "No",
+        text: "No"
+      }
+    ]
+  }) }}
+
+
+<code>
+  {{ govukRadios({ 
+    classes: "govuk-radios--inline",
+    name: "",
+    value: "",
+    fieldset: {
+      legend: {
+        text: "Do you juggle?",
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        value: "Yes",
+        text: "Yes"
+      },
+      {
+        value: "No",
+        text: "No"
+      }
+    ]
+  }) }}
+  </code>
+
+  
+  
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+  
+  {% endblock %}
+  

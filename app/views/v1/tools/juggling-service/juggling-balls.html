@@ -1,0 +1,77 @@
+{% extends "v1/layouts/main.html" %}
+
+<!-- I set these values at the top of the page to save scrolling.  -->
+{% if  data['user'] == "agent"  %} 
+  {% set pageQuestion = "How many balls can your client juggle?" %}
+  {% set pageHint = "" %}
+  {% set pageAnswer = "how-many-balls" %}
+  {% set valueOne = "3 or more" %}
+  {% set valueTwo= "1 or two" %}
+  {% set valueThree= "None - they cannot juggle" %}
+  {% set errorOne = "Enter a value for how many balls can they juggle" %}
+{% else %}
+  {% set pageQuestion = "How many balls can you juggle?" %}
+  {% set pageHint = "" %}
+  {% set pageAnswer = "how-many-balls" %}
+  {% set valueOne = "3 or more" %}
+  {% set valueTwo= "1 or two" %}
+  {% set valueThree= "None - I cannot juggle" %}
+  {% set errorOne = "Enter a value for how many balls can you juggle" %}
+{% endif %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+{{pageQuestion}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds"> 
+
+    <!-- Uncomment this H1 heading and add a pageTitle value for complex 
+      question pages -->
+    <!-- <h1 class="govuk-heading-l">
+      {{pageTitle}}
+    </h1> -->
+
+  <form action="juggling-balls-router" method="post" novalidate>
+
+    {{ govukRadios({
+      name: pageAnswer,
+      value: data[pageAnswer],
+      fieldset: {
+        legend: {
+          text: pageQuestion,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: pageHint
+      },
+      items: [
+        {
+          value: valueOne,
+          text: valueOne
+        },
+        {
+          value: valueTwo,
+          text: valueTwo
+        }
+        ,
+        {
+          value: valueThree,
+          text: valueThree
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+  
+  {% endblock %}
+  

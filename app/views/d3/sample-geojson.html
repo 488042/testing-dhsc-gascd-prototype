@@ -1,0 +1,250 @@
+<script>
+var freeBus = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [52.05, 0.72],
+                    [53.0008225440979, 0.73]
+                ]
+            },
+            "properties": {
+                "popupContent": "This is a free bus line that will take you across downtown.",
+                "underConstruction": false
+            },
+            "id": 1
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [52.0008225440979, 0.7251891803969535],
+                    [52.019820470809937, 0.724979664004068]
+                ]
+            },
+            "properties": {
+                "popupContent": "This is a free bus line that will take you across downtown.",
+                "underConstruction": true
+            },
+            "id": 2
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [52.019820470809937, 0.724979664004068],
+                    [52.018689651489258, 0.7241052354709055]
+                ]
+            },
+            "properties": {
+                "popupContent": "This is a free bus line that will take you across downtown.",
+                "underConstruction": false
+            },
+            "id": 3
+        }
+    ]
+};
+
+var lightRailStop = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "popupContent": "18th & California Light Rail Stop"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [52.018999178409576, 0.724683938093904]
+            }
+        },{
+            "type": "Feature",
+            "properties": {
+                "popupContent": "20th & Welton Light Rail Stop"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [52.018689115047453, 0.7247924136466565]
+            }
+        }
+    ]
+};
+
+var bicycleRental = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    52.01998241,
+                    0.72471494
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "popupContent": "This is a B-Cycle Station. Come pick up a bike and pay by the hour. What a deal!"
+            },
+            "id": 51
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    52.01983545,
+                    0.72502833
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "popupContent": "This is a B-Cycle Station. Come pick up a bike and pay by the hour. What a deal!"
+            },
+            "id": 52
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    52.01963919,
+                    0.72444271
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "popupContent": "This is a B-Cycle Station. Come pick up a bike and pay by the hour. What a deal!"
+            },
+            "id": 54
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    52.01960754,
+                    0.72498956
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "popupContent": "This is a B-Cycle Station. Come pick up a bike and pay by the hour. What a deal!"
+            },
+            "id": 55
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    52.01933717,
+                    0.72477264
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "popupContent": "This is a B-Cycle Station. Come pick up a bike and pay by the hour. What a deal!"
+            },
+            "id": 57
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    52.01913392,
+                    0.72432392
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "popupContent": "This is a B-Cycle Station. Come pick up a bike and pay by the hour. What a deal!"
+            },
+            "id": 58
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    52.05,
+                    0.72
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "popupContent": "This is a B-Cycle Station. Come pick up a bike and pay by the hour. What a deal!"
+            },
+            "id": 74
+        }
+    ]
+};
+
+var campus = {
+    "type": "Feature",
+    "properties": {
+        "popupContent": "This is the Auraria West Campus",
+        "style": {
+            weight: 2,
+            color: "#999",
+            opacity: 1,
+            fillColor: "#B0DE5C",
+            fillOpacity: 0.8
+        }
+    },
+    "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+            [
+                [
+                    [52.00432014465332, 0.724732195489861],
+                    [52.00715255737305, 0.724620006835170],
+                    [52.00921249389647, 0.724468219277038],
+                    [52.01067161560059, 0.724362625960105],
+                    [52.01195907592773, 0.724290029616054],
+                    [52.00989913940431, 0.724078835902781],
+                    [52.00758171081543, 0.724059036160317],
+                    [52.00346183776855, 0.724059036160317],
+                    [52.00097274780272, 0.724059036160317],
+                    [52.00062942504881, 0.724072235994946],
+                    [52.00020027160645, 0.724191033368865],
+                    [52.00071525573731, 0.724276830198601],
+                    [52.00097274780272, 0.724369225589818],
+                    [52.00097274780272, 0.724461619742136],
+                    [52.00123023986816, 0.724534214278395],
+                    [52.00183105468751, 0.724613407445653],
+                    [52.00432014465332, 0.724732195489861]
+                ],[
+                    [52.00361204147337, 0.724354376414072],
+                    [52.00301122665405, 0.724278480127163],
+                    [52.00221729278564, 0.724316428375108],
+                    [52.00283956527711, 0.724390674342741],
+                    [52.00361204147337, 0.724354376414072]
+                ]
+            ],[
+                [
+                    [52.00942707061768, 0.723989736613708],
+                    [52.00942707061768, 0.723910536278566],
+                    [52.00685214996338, 0.723923736397631],
+                    [52.00384807586671, 0.723910536278566],
+                    [52.00174522399902, 0.723903936209552],
+                    [52.00041484832764, 0.723910536278566],
+                    [52.00041484832764, 0.723979836621592],
+                    [52.00535011291504, 0.723986436617916],
+                    [52.00942707061768, 0.723989736613708]
+                ]
+            ]
+        ]
+    }
+};
+
+var coorsField = {
+    "type": "Feature",
+    "properties": {
+        "popupContent": "Coors Field"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [52.05, 0.72]
+    }
+};
+</script>

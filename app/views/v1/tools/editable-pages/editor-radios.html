@@ -1,0 +1,165 @@
+{% extends "v1/layouts/main.html" %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+ Radio buttons editor
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-third">
+    <form action="#" method="post" novalidate>
+<h1 class="govuk-heading-m">
+  Radio buttons editor
+</h1>
+
+{% include "./_navigation.html" %}
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Legend
+      </label>
+      <p id="ss-h1-hint" class="govuk-hint">Edit the question</p>
+      <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
+      type="text" value="{{ data['ss-h1'] | default('Do you juggle?')}}" aria-describedby="ss-h1-hint">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Hint text (optional)
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
+      type="text" value="{{ data['ss-hint'] }}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Option 1
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
+      type="text" value="{{ data['ss-value-1'] | default('Yes')}}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Option 2
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
+      type="text" value="{{ data['ss-value-2'] | default('No')}}">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Name (for session data)
+      </label>
+      <p id="ss-answer-hint" class="govuk-hint">Stores the answer in your browser</p>
+      <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
+      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}" aria-describedby="ss-answer-hint">
+    </div>
+
+    <p class="govuk-body">
+      Press return / 'Apply' to update the page.
+    </p>
+
+    {{ govukButton({
+      text: "Apply"
+    }) }}
+
+  </form>
+
+    <h1 class="govuk-heading-m">
+      Output
+    </h1>
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button"  onclick="myFunction()">
+      Copy to clipboard
+    </button>
+  <p class="govuk-body" id="myInput">
+<code>
+  &#123;&#123; govukRadios&#40;&#123; 
+    classes: &#x22;govuk-radios--inline&#x22;,
+    name: &#x22;{{data['ss-answer']}}&#x22;,
+    value: &#x22;{{data['ss-answer']}}&#x22;,
+    fieldset: &#123;
+      legend: &#123;
+        text: &#x22;{{data['ss-h1']}}&#x22;,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      &#125;
+    &#125;,
+    hint: &#123;
+      text: &#x22;{{data['ss-hint']}}&#x22;
+    &#125;,
+    items: &#91;
+      &#123;
+        value: &#x22;{{data['ss-value-1']}}&#x22;,
+        text: &#x22;{{data['ss-value-1']}}&#x22;
+      &#125;,
+      &#123;
+        value: &#x22;{{data['ss-value-2']}}&#x22;,
+        text: &#x22;{{data['ss-value-2']}}&#x22;
+      &#125;
+    &#93;
+  &#125;&#41; &#125;&#125;
+  </code>
+</p>
+
+
+    
+  </div> 
+  <div class="govuk-grid-column-two-thirds"> 
+  
+  <form action="editor-radios" method="post" novalidate>
+    
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    name: data['ss-answer'],
+    id: data['ss-answer'],
+    fieldset: {
+      legend: {
+        text: data['ss-h1'] | default("Do you juggle?"),
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    hint: {
+      text: data['ss-hint']
+    },
+    items: [
+      {
+        value: data['ss-value-1'],
+        text: data['ss-value-1'] 
+      },
+      {
+        value: data['ss-value-2'],
+        text: data['ss-value-2'] 
+      }
+    ]
+  }) }}
+
+  <span class="govuk-visually-hidden">
+  <input type="hidden" name="ss-answer" value={{data['ss-answer']}}>
+</span>
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+  <script>
+  function myFunction() {
+    // Get the text field
+    let copyText = document.getElementById("myInput").innerHTML;
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText);
+
+    // Alert the copied text
+    alert("Code copied");
+} 
+  </script>
+  
+  {% endblock %}
+  
