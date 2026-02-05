@@ -1,4 +1,17 @@
-{% from "components/chart/_macro.njk" import onsChart %}
+{% extends "v9/layouts/default.html" %}
 
-<h1 class="govuk-heading-l">ONS line chart spike</h1>
-{{ onsChart(chart) }}
+{% block content %}
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">ONS line chart spike</h1>
+
+    <div class="govuk-form-group">
+      {% from "components/chart/_macro.njk" import onsChart %}
+      {{onsChart(chart)}}
+    </div>
+    
+  </div>
+
+</div>
+{% endblock %}

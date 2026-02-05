@@ -13,3 +13,12 @@ addFilter('addcommas', function (content) {
   // TO DO - add case to handle nothing being there 
   return content.toLocaleString("en-US") 
 })
+
+// app/filters.js
+module.exports = (env) => {
+  // tojson filter (ONS templates use it)
+  env.addFilter("tojson", (value) => JSON.stringify(value))
+
+  // extend global (ONS templates call extend(...))
+  env.addGlobal("extend", (...objects) => Object.assign({}, ...(objects || []).filter(Boolean)))
+}

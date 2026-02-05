@@ -1,0 +1,33 @@
+{% from "components/checkboxes/_macro.njk" import onsCheckboxes %}
+
+{{
+    onsCheckboxes({
+        "checkboxesLabel": "All types",
+        "legend": "Select type",
+        "name": "types",
+        "borderless": true,
+        "checkboxes": [
+            {
+                "id": "booklet-example-checkbox-without-border",
+                "label": {
+                    "text": "Booklet"
+                },
+                "value": "booklet"
+            },
+            {
+                "id": "logo-example-checkbox-without-border",
+                "label": {
+                    "text": "Logo"
+                },
+                "value": "logo"
+            },
+            {
+                "id": "poster-example-checkbox-without-border",
+                "label": {
+                    "text": "Poster"
+                },
+                "value": "poster"
+            }
+        ]
+    })
+}}

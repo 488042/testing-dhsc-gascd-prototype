@@ -1,0 +1,13 @@
+{% from "components/input/_macro.njk" import onsInput %}
+
+{{
+    onsInput({
+        "id": "number-example-input",
+        "type": "number",
+        "width": "2",
+        "autocomplete": "off",
+        "label": {
+            "text": "Number of bedrooms"
+        }
+    })
+}}

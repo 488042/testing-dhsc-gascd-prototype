@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "govuk-prototype-kit dev",
     "serve": "govuk-prototype-kit serve",
-    "start": "govuk-prototype-kit start"
+    "start": "govuk-prototype-kit start",
+    "postinstall": "rm -rf app/views/components app/views/layout && mkdir -p app/views/components app/views/layout && cp -R node_modules/@ons/design-system/components/* app/views/components/ && cp -R node_modules/@ons/design-system/layout/* app/views/layout/"
   },
   "dependencies": {
     "@govuk-one-login/service-header": "^5.0.0",

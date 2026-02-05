@@ -1,0 +1,17 @@
+.ons-image {
+    margin: 0;
+
+    @extend .ons-u-mb-l;
+
+    &__img {
+        display: block;
+        max-width: 100%;
+    }
+
+    &__caption {
+        @extend .ons-u-fs-s;
+
+        display: block;
+        padding: 0.5rem 0 0;
+    }
+}

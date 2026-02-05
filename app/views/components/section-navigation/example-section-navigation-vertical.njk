@@ -1,0 +1,80 @@
+{% from "components/section-navigation/_macro.njk" import onsSectionNavigation %}
+{{
+    onsSectionNavigation({
+        "variants": "vertical",
+        "id": "section-menu",
+        "currentPath": "#section-6",
+        "sections":[
+            {
+                "title": "Section Title",
+                "itemsList": [
+                    {
+                        "text": "Section 1",
+                        "url": "#section-1",
+                        "anchors": [
+                            {
+                                "text": "Sub section 1",
+                                "url": "#sub-section-1"
+                            },
+                            {
+                                "text": "Sub section 2",
+                                "url": "#sub-section-2"
+                            },
+                            {
+                                "text": "Sub section 3",
+                                "url": "#sub-section-3"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Section 2",
+                        "url": "#section-2"
+                    },
+                    {
+                        "text": "Section 3",
+                        "url": "#section-3"
+                    },
+                    {
+                        "text": "Section 4",
+                        "url": "#section-4"
+                    }
+                ]
+            },
+            {
+                "title": "Section Title",
+                "itemsList": [
+                    {
+                        "text": "Section 5",
+                        "url": "#section-5"
+                    },
+                    {
+                        "text": "Section 6",
+                        "url": "#section-6",
+                        "anchors": [
+                            {
+                                "text": "Sub section 1",
+                                "url": "#sub-section-1"
+                            },
+                            {
+                                "text": "Sub section 2",
+                                "url": "#sub-section-2"
+                            },
+                            {
+                                "text": "Sub section 3",
+                                "url": "#sub-section-3"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Section 7",
+                        "url": "#0"
+                    },
+                    {
+                        "text": "Section 8",
+                        "url": "#0"
+                    }
+                ]
+            }
+        ]
+    })
+}}

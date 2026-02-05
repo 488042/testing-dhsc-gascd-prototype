@@ -1,0 +1,40 @@
+{% from "components/summary/_macro.njk" import onsSummary %}
+{{
+    onsSummary({
+        "summaries": [
+            {
+                "groups": [
+                    {
+                        "title": "Turnover",
+                        "rows": [
+                            {
+                                "title": "What are the dates of the sales period you are reporting for?",
+                                "itemsList": [
+                                    {
+                                        "valueList": [
+                                            {
+                                                "text": "01 January 2015 to 02 February 2017"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "Total turnover",
+                                "itemsList": [
+                                    {
+                                        "valueList": [
+                                            {
+                                                "text": "£234,000.00"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    })
+}}
