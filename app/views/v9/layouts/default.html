@@ -14,6 +14,9 @@
 {{super()}}
 <link href="/public/css/v9/styles.css" rel="stylesheet" type="text/css" />
 <link href="/public/css/v9/print.css" media="print" rel="stylesheet" type="text/css" />
+{% if useOnsAssets %}
+  <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/css/main.css">
+{% endif %}
 {% endblock %}
 
 {% block header %}
@@ -147,4 +150,8 @@
   {{ super() }}
   <!-- Custom global jQuery and JavaScript for GASCD -->
   <script src="/public/javascripts/v9/custom-global-behaviour.js"></script>
+  {% if useOnsAssets %}
+  <script>var ONS_assets_base_URL='https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/';</script>
+  <script src="https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/scripts/main.js"></script>
+  {% endif %}
 {% endblock %}

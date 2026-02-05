@@ -801,6 +801,7 @@ module.exports = function(router) {
       }),
       marker: false
     }));
+    const onsVersion = require("@ons/design-system/package.json").version
 
     res.render(version + '/spikes/ons-line-chart', {
       chart: {
@@ -824,7 +825,9 @@ module.exports = function(router) {
           categories
         },
         series
-      }
+      },
+      useOnsAssets: true,
+      onsVersion
     });
 
   });
