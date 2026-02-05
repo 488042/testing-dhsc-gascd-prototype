@@ -3,6 +3,8 @@ module.exports = function(router) {
   var version = 'v9';
   const providerLocations = require('../data/v9/provider-locations.json');
   const estimatedEarlyOnsetDementia = require('../data/v9/future-planning/estimated-early-onset-dementia.json');
+  /* Added by me to test a theory... */
+  // const estimatedEarlyOnsetDementia = require('../data/v9/future-planning/estimated-early-onset-dementia.json');
 
   /*****
    * General prototype pages (not part of the service)
@@ -743,15 +745,15 @@ module.exports = function(router) {
     const series = areas.map((area) => ({
       name: area,
       data: rows.map(r => {
-        
         const raw = r[area];
 
-        // Keep gaps if your dataset ever has blanks
         if (raw === "" || raw === null || typeof raw === "undefined") return null;
 
         const num = Number(raw);
-        
-        return Number.isFinite(num) ? num : null;
+        if (!Number.isFinite(num)) return null;
+
+        // ✅ Use point objects so 0 is not treated as "no data"
+        return { y: num };
       }),
       // ONS line chart supports marker toggle per series
       marker: false
@@ -791,19 +793,27 @@ module.exports = function(router) {
     const rows = estimatedEarlyOnsetDementia['Change over time'] || [];
     const categories = rows.map(r => String(r.Year));
     const areas = ["Suffolk", "Norfolk", "Kent", "Somerset", "Dorset", "Herefordshire"];
+    // ✅ Build series data (this is what was missing – your rendered HTML had series: [])
     const series = areas.map((area) => ({
       name: area,
       data: rows.map(r => {
         const raw = r[area];
-        if (raw === "" || raw === null || typeof raw === "undefined") return null;
+
+        // preserve gaps
+        if (raw === "" || raw === null || typeof raw === "undefined") {
+          return { y: null };
+        }
+
         const num = Number(raw);
-        return Number.isFinite(num) ? num : null;
+        return { y: Number.isFinite(num) ? num : null };
       }),
-      marker: false
+      marker: { enabled: false } // optional (keeps the line clean)
     }));
-    const onsVersion = require("@ons/design-system/package.json").version
+    const onsVersion = require("@ons/design-system/package.json").version;
 
     res.render(version + '/spikes/ons-line-chart', {
+      useOnsAssets: true,
+      onsVersion,
       chart: {
         chartType: "line",
         theme: "primary",
@@ -824,13 +834,44 @@ module.exports = function(router) {
           type: "category",
           categories
         },
-        series
-      },
-      useOnsAssets: true,
-      onsVersion
+        ySeries: series
+      }
     });
 
   });
+
+  // Spike: ONS line chart debug (prints raw data)
+router.get('/' + version + '/' + 'spikes/debug', function (req, res) {
+
+  const rows = estimatedEarlyOnsetDementia['Change over time'] || [];
+
+  const categories = rows.map(r => String(r.Year));
+
+  const areas = ["Suffolk", "Norfolk", "Kent", "Somerset", "Dorset", "Herefordshire"];
+
+  const series = areas.map((area) => ({
+    name: area,
+    data: rows.map(r => {
+      const raw = r[area];
+      if (raw === "" || raw === null || typeof raw === "undefined") return null;
+      const num = Number(raw);
+      return Number.isFinite(num) ? num : null;
+    })
+  }));
+
+  res.render(version + '/spikes/debug', {
+    now: new Date().toISOString(),
+    rowsCount: rows.length,
+    categories,
+    series,
+    chart: {
+      xAxis: { categories },
+      series
+    }
+  });
+
+});
+
 
   /*****
    * Additional screens

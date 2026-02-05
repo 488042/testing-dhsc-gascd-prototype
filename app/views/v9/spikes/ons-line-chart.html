@@ -15,6 +15,8 @@
 
     <div class="govuk-form-group">
       {% from "components/chart/_macro.njk" import onsChart %}
+      <p class="govuk-body">ySeries length: {{ chart.ySeries | length }}</p>
+
       {{onsChart(chart)}}
     </div>
     
@@ -26,27 +28,11 @@
 {% block scripts %}
 {{ super() }}
 {% if useOnsAssets %}
-<script>
-  // Some environments need this for chunk loading
-  var ONS_assets_base_URL = 'https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/';
-
-  (function () {
-    var s = ['https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/scripts/main.js'],
-      c = document.createElement('script');
-
-    // If the browser doesn't support <script nomodule>, load the ES5 bundle
-    if (!('noModule' in c)) {
-      for (var i = 0; i < s.length; i++) {
-        s[i] = s[i].replace('.js', '.es5.js');
-      }
-    }
-
-    for (var i = 0; i < s.length; i++) {
-      var e = document.createElement('script');
-      e.src = s[i];
-      document.body.appendChild(e);
-    }
-  })();
-</script>
+  <script>
+    // Required for ONS chunk loading
+    window.ONS_assets_base_URL = "https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/";
+  </script>
+  <script type="module" src="https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/scripts/main.js"></script>
+  <script nomodule src="https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/scripts/main.es5.js"></script>
 {% endif %}
 {% endblock %}
