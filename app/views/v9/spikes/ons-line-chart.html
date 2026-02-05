@@ -1,5 +1,12 @@
 {% extends "v9/layouts/default.html" %}
 
+{% block bodyStart %}
+{{ super() }}
+<script>
+  document.body.className = (document.body.className ? document.body.className + ' ons-js-enabled' : 'ons-js-enabled');
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
 
@@ -14,4 +21,32 @@
   </div>
 
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% if useOnsAssets %}
+<script>
+  // Some environments need this for chunk loading
+  var ONS_assets_base_URL = 'https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/';
+
+  (function () {
+    var s = ['https://cdn.ons.gov.uk/sdc/design-system/{{ onsVersion }}/scripts/main.js'],
+      c = document.createElement('script');
+
+    // If the browser doesn't support <script nomodule>, load the ES5 bundle
+    if (!('noModule' in c)) {
+      for (var i = 0; i < s.length; i++) {
+        s[i] = s[i].replace('.js', '.es5.js');
+      }
+    }
+
+    for (var i = 0; i < s.length; i++) {
+      var e = document.createElement('script');
+      e.src = s[i];
+      document.body.appendChild(e);
+    }
+  })();
+</script>
+{% endif %}
 {% endblock %}
