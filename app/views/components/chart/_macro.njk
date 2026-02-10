@@ -203,7 +203,7 @@
                         }
                     %}
                     {# Use `set` tag to avoid printing the return value of extend #}
-                    {% set series = series | onsArrayAppend(seriesItem) %}
+                    {% set _ = extend(series, seriesItem) %}
                 {% endif %}
                 {% if item.type == 'line' %}
                     {% set lineSeriesCount = lineSeriesCount + 1 %}
