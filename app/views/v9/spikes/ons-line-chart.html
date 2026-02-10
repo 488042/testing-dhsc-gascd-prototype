@@ -1,0 +1,57 @@
+{% extends "v9/layouts/default.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+
+    <div class="govuk-form-group">
+      <h1 class="govuk-heading-xl">ONS line chart spike</h1>
+
+      <div data-highcharts-base-chart data-highcharts-type="{{chart.chartType}}" data-highcharts-theme="{{chart.theme}}" data-highcharts-title="{{chart.title}}" data-highcharts-id="{{chart.id}}">
+        <figure class="ons-chart" aria-describedby="chart-audio-description-{{chart.id}}">
+          <h2 class="ons-chart__title">{{chart.title}}</h2>
+          {% if chart.subtitle %}
+          <h3 class="ons-chart__subtitle">{{chart.subtitle}}</h3>
+          {% endif %}
+          <p class="ons-u-vh" id="chart-audio-description-{{chart.id}}">{{chart.description}}</p>
+
+          <div data-highcharts-chart-container class="ons-chart__container" tabindex="0" role="region" aria-label="chart container" aria-describedby="chart-instructions-{{chart.id}}">
+            
+            <div id="chart-instructions-{{chart.id}}" class="ons-u-vh">
+              Use the Tab key to move focus into the chart. Once inside, use the arrow keys to navigate between data points. As you move, tooltips will be announced to describe each point. Touch device users, explore by touch or with swipe gestures.
+            </div>
+
+            <div data-highcharts-chart class="ons-chart__chart">
+
+            </div>
+
+          </div>
+
+          {% if chart.caption %}
+          <figcaption class="ons-chart__caption">{{chart.caption}}</figcaption>
+          {% endif %}
+        </figure>
+
+        <script type="application/json" data-highcharts-config--{{chart.id}}>
+          {{highchartsConfig | safe}}
+        </script>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+{% if useOnsAssets %}
+  <script>
+    window.ONS_assets_base_URL = "https://cdn.ons.gov.uk/sdc/design-system/{{onsVersion}}/";
+  </script>
+  <script type="module" src="https://cdn.ons.gov.uk/sdc/design-system/{{onsVersion}}/scripts/main.js"></script>
+  <script nomodule src="https://cdn.ons.gov.uk/sdc/design-system/{{onsVersion}}/scripts/main.es5.js"></script>
+{% endif %}
+{% endblock %}

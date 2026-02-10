@@ -732,56 +732,60 @@ module.exports = function(router) {
   })
 
   // Early onset dementia: change over time (line chart)
-  router.get('/' + version + '/' + 'signed-in/topics/future-planning/estimates-on-early-onset-dementia/data', function (req, res) {
+  // To be added...
 
-    const rows = estimatedEarlyOnsetDementia['Change over time'] || [];
-    // X-axis categories (years)
+  // Spike: ONS line chart (START)
+  router.get('/' + version + '/' + 'spikes/ons-line-chart', function (req, res) {
+    
+    const rows = estimatedEarlyOnsetDementia["Change over time"] || [];
     const categories = rows.map(r => String(r.Year));
-    // Series (each LA becomes one line)
     const areas = ["Suffolk", "Norfolk", "Kent", "Somerset", "Dorset", "Herefordshire"];
     const series = areas.map((area) => ({
       name: area,
       data: rows.map(r => {
-        
         const raw = r[area];
-
-        // Keep gaps if your dataset ever has blanks
         if (raw === "" || raw === null || typeof raw === "undefined") return null;
-
         const num = Number(raw);
-        
         return Number.isFinite(num) ? num : null;
       }),
-      // ONS line chart supports marker toggle per series
-      marker: false
+      marker: { enabled: false }
     }));
+    const onsVersion = require("@ons/design-system/package.json").version;
+    // Build the same config structure the macro would have output
+    const config = {
+      chart: { type: "line" },
+      legend: { enabled: true },
+      yAxis: {
+        title: { text: "Percentage change (%)" },
+        labels: { format: "{value:.2f}" }
+      },
+      xAxis: {
+        title: { text: "Year" },
+        categories,
+        type: "category",
+        labels: {}
+      },
+      series
+    };
 
-    res.render(version + '/signed-in/topics/future-planning/estimates-on-early-onset-dementia/data', {
+    res.render(version + "/spikes/ons-line-chart", {
+      useOnsAssets: true,
+      onsVersion,
       chart: {
         chartType: "line",
         theme: "primary",
         title: "Change over time",
         subtitle: "Percentage change over time (ages 30 to 64)",
         id: "estimated-early-onset-dementia-change-over-time",
-        headingLevel: 2,
         caption: "Source: Prototype dataset",
         description:
-          "Line chart showing percentage change over time for Suffolk, Norfolk, Kent, Somerset, Dorset and Herefordshire.",
-        legend: true,
-        yAxis: {
-          title: "Percentage change (%)",
-          labelFormat: "{value:.2f}"
-        },
-        xAxis: {
-          title: "Year",
-          type: "category",
-          categories
-        },
-        series
-      }
+          "Line chart showing percentage change over time for Suffolk, Norfolk, Kent, Somerset, Dorset and Herefordshire."
+      },
+      // IMPORTANT: stringify server-side and pass as a literal string
+      highchartsConfig: JSON.stringify(config)
     });
-
   });
+  // Spike: ONS line chart (END)
 
   /*****
    * Additional screens
