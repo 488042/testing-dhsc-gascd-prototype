@@ -1,26 +1,5 @@
-{% extends "v9/layouts/default.html" %}
+{{"hello" | tojson}}
 
-{% block content %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+{{extend({a:1},{b:2})}}
 
-      <h1 class="govuk-heading-xl">ONS line chart debug</h1>
-
-      <h2 class="govuk-heading-m">Route hit timestamp</h2>
-      <p class="govuk-body">{{ now }}</p>
-
-      <h2 class="govuk-heading-m">Rows count</h2>
-      <p class="govuk-body">{{ rowsCount }}</p>
-
-      <h2 class="govuk-heading-m">Categories</h2>
-      <pre class="govuk-body">{{ categories | dump }}</pre>
-
-      <h2 class="govuk-heading-m">Series (as passed to template)</h2>
-      <pre class="govuk-body">{{ series | dump }}</pre>
-
-      <h2 class="govuk-heading-m">Chart object (as passed to template)</h2>
-      <pre class="govuk-body">{{ chart | dump }}</pre>
-
-    </div>
-  </div>
-{% endblock %}
+{% include "ons/components/chart/_macro.njk" %}

@@ -2,8 +2,7 @@
   "serviceName": "Get adult social care data",
   "plugins": {
     "govuk-frontend": {
-      "rebrand": true
-    },
-    "ons-design-system-plugin": {}
+	    "rebrand": true
+    }
   }
 }

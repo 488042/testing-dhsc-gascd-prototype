@@ -1,8 +1,0 @@
-{
-  "nunjucksPaths": [
-    "/node_modules/@ons/design-system"
-  ],
-  "nunjucksFilters": [
-    "/filters.js"
-  ]
-}
