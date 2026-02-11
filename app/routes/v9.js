@@ -732,7 +732,56 @@ module.exports = function(router) {
   })
 
   // Early onset dementia: change over time (line chart)
-  // To be added...
+  router.get('/' + version + '/' + 'signed-in/topics/future-planning/estimates-on-early-onset-dementia/data', function (req, res) {
+    
+    const rows = estimatedEarlyOnsetDementia["Change over time"] || [];
+    const categories = rows.map(r => String(r.Year));
+    const areas = ["Suffolk", "Norfolk", "Kent", "Somerset", "Dorset", "Herefordshire"];
+    const series = areas.map((area) => ({
+      name: area,
+      data: rows.map(r => {
+        const raw = r[area];
+        if (raw === "" || raw === null || typeof raw === "undefined") return null;
+        const num = Number(raw);
+        return Number.isFinite(num) ? num : null;
+      }),
+      marker: { enabled: false }
+    }));
+    const onsVersion = require("@ons/design-system/package.json").version;
+    // Build the same config structure the macro would have output
+    const config = {
+      chart: { type: "line" },
+      legend: { enabled: true },
+      yAxis: {
+        title: { text: "Percentage change (%)" },
+        labels: { format: "{value:.2f}" }
+      },
+      xAxis: {
+        title: { text: "Year" },
+        categories,
+        type: "category",
+        labels: {}
+      },
+      series
+    };
+
+    res.render(version + "/signed-in/topics/future-planning/estimates-on-early-onset-dementia/data", {
+      useOnsAssets: true,
+      onsVersion,
+      chart: {
+        chartType: "line",
+        theme: "primary",
+        title: "Figure 1: estimated percentage change in population aged 30-64 with early onset dementia compared with similar LAs",
+        subtitle: "Percentage change over time (ages 30 to 64)",
+        id: "estimated-early-onset-dementia-change-over-time",
+        caption: "Source: PANSI",
+        description:
+          "Line chart showing percentage change over time for Suffolk, Norfolk, Kent, Somerset, Dorset and Herefordshire."
+      },
+      // IMPORTANT: stringify server-side and pass as a literal string
+      highchartsConfig: JSON.stringify(config)
+    });
+  });
 
   // Spike: ONS line chart (START)
   router.get('/' + version + '/' + 'spikes/ons-line-chart', function (req, res) {
@@ -774,10 +823,10 @@ module.exports = function(router) {
       chart: {
         chartType: "line",
         theme: "primary",
-        title: "Change over time",
+        title: "Figure 1: estimated percentage change in population aged 30-64 with early onset dementia compared with similar LAs",
         subtitle: "Percentage change over time (ages 30 to 64)",
         id: "estimated-early-onset-dementia-change-over-time",
-        caption: "Source: Prototype dataset",
+        caption: "Source: PANSI",
         description:
           "Line chart showing percentage change over time for Suffolk, Norfolk, Kent, Somerset, Dorset and Herefordshire."
       },

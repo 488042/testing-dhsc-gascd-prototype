@@ -1,6 +1,37 @@
 <div class="govuk-form-group">
-  <h4 class="govuk-heading-s">Figure 1: estimated percentage change in population aged 30-64 with early onset dementia compared with similar <abbr title="Local Authority">LA</abbr>s</h4>
-  <img src="/public/images/data-visualisations/future-planning/estimates-on-early-onset-dementia/time-series.png" alt class="data-visualisation-image">
+  <!-- <h4 class="govuk-heading-s">Figure 1: estimated percentage change in population aged 30-64 with early onset dementia compared with similar <abbr title="Local Authority">LA</abbr>s</h4>
+  <img src="/public/images/data-visualisations/future-planning/estimates-on-early-onset-dementia/time-series.png" alt class="data-visualisation-image"> -->
+
+  <div data-highcharts-base-chart data-highcharts-type="{{chart.chartType}}" data-highcharts-theme="{{chart.theme}}" data-highcharts-title="{{chart.title}}" data-highcharts-id="{{chart.id}}">
+    <figure class="ons-chart" aria-describedby="chart-audio-description-{{chart.id}}">
+      <h2 class="ons-chart__title">{{chart.title}}</h2>
+      {% if chart.subtitle %}
+      <h3 class="ons-chart__subtitle">{{chart.subtitle}}</h3>
+      {% endif %}
+      <p class="ons-u-vh" id="chart-audio-description-{{chart.id}}">{{chart.description}}</p>
+
+      <div data-highcharts-chart-container class="ons-chart__container" tabindex="0" role="region" aria-label="chart container" aria-describedby="chart-instructions-{{chart.id}}">
+        
+        <div id="chart-instructions-{{chart.id}}" class="ons-u-vh">
+          Use the Tab key to move focus into the chart. Once inside, use the arrow keys to navigate between data points. As you move, tooltips will be announced to describe each point. Touch device users, explore by touch or with swipe gestures.
+        </div>
+
+        <div data-highcharts-chart class="ons-chart__chart">
+
+        </div>
+
+      </div>
+
+      {% if chart.caption %}
+      <figcaption class="ons-chart__caption">{{chart.caption}}</figcaption>
+      {% endif %}
+    </figure>
+
+    <script type="application/json" data-highcharts-config--{{chart.id}}>
+      {{highchartsConfig | safe}}
+    </script>
+  </div>
+
 </div>
 
 <div class="govuk-form-block">
