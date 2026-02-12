@@ -18,6 +18,22 @@
 {% endblock %}
 
 {% block content %}
+<style>
+
+  /* Expansion on the ONS Design System line chart component (https://service-manual.ons.gov.uk/design-system/components/line-chart-component) so that it works for GASCD */
+  .ons-scope .ons-chart {
+    max-width: none;
+  }
+  .ons-scope .ons-chart__caption {
+    color: inherit;
+  }
+  .ons-chart__fallback-image {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+</style>
+
 <div class="govuk-grid-row">
 
   <div class="govuk-grid-column-full">
@@ -255,13 +271,4 @@
 <script src="/public/javascripts/v9/filters.js"></script>
 <!-- Font Awesome 4 icons for the notifications -->
 <link href="/public/open-source/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-{% if useOnsAssets %}
-<!-- <script>
-  
-  window.ONS_assets_base_URL = "https://cdn.ons.gov.uk/sdc/design-system/{{onsVersion}}/";
-  
-</script> -->
-<script type="module" src="https://cdn.ons.gov.uk/sdc/design-system/{{onsVersion}}/scripts/main.js"></script>
-<script nomodule src="https://cdn.ons.gov.uk/sdc/design-system/{{onsVersion}}/scripts/main.es5.js"></script>
-{% endif %}
 {% endblock %}

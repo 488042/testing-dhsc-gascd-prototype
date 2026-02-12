@@ -7,14 +7,6 @@
 
 // Components that aren't in GOV.UK Frontend
 @import "components/cards";
-// ONS Design System (base Sass)
-@import 'node_modules/@ons/design-system/scss/vars/index';
-@import 'node_modules/@ons/design-system/scss/helpers/index';
-@import 'node_modules/@ons/design-system/scss/utilities/index';
-@import 'node_modules/@ons/design-system/scss/base/index';
-@import 'node_modules/@ons/design-system/scss/objects/index';
-// ONS Design System (specific components)
-@import 'node_modules/@ons/design-system/components/chart/chart';
 
 /* Override to force pages using the unbranded template to fill the page height */
 .unbranded-fill-page {

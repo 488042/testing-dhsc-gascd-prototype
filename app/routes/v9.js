@@ -753,7 +753,7 @@ module.exports = function(router) {
       chart: { type: "line" },
       legend: { enabled: true },
       yAxis: {
-        title: { text: "Percentage change (%)" },
+        title: { text: "Percentage change from baseline (2025)" },
         labels: { format: "{value:.2f}" }
       },
       xAxis: {
@@ -772,11 +772,11 @@ module.exports = function(router) {
         chartType: "line",
         theme: "primary",
         title: "Figure 1: estimated percentage change in population aged 30-64 with early onset dementia compared with similar LAs",
-        subtitle: "Percentage change over time (ages 30 to 64)",
         id: "estimated-early-onset-dementia-change-over-time",
         caption: "Source: PANSI",
-        description:
-          "Line chart showing percentage change over time for Suffolk, Norfolk, Kent, Somerset, Dorset and Herefordshire."
+        description: "Line chart showing percentage change over time for Suffolk, Norfolk, Kent, Somerset, Dorset and Herefordshire.",
+        fallbackImageUrl: "/public/downloads/v9/future-planning/estimated-early-onset-dementia/figure-1-predicted-early-onset-dementia-prevalence-over-time.png",
+        fallbackImageAlt: "Line chart showing percentage change over time for Suffolk, Norfolk, Kent, Somerset, Dorset and Herefordshire."
       },
       // IMPORTANT: stringify server-side and pass as a literal string
       highchartsConfig: JSON.stringify(config)
